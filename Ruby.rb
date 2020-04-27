@@ -66,34 +66,40 @@ class Combination
   end
 end
 
+class Main
+  def run
+    suits = ['H', 'D', 'C', 'S'] # all suits
+    types = ['J', 'Q', 'K', 'A']
+    numbers = [*2..10]
+    numbers = numbers.map(&:to_s)
+    types += numbers # all types
 
-suits = ['H', 'D', 'C', 'S'] # all suits
-types = ['J', 'Q', 'K', 'A']
-numbers = [*2..10]
-numbers = numbers.map(&:to_s)
-types += numbers # all types
+    cards = []
 
-cards = []
+    i = 0
+    puts 'Hand:'
 
-i = 0
-puts 'Hand:'
+    while i < 2
+      card = Card.new(suits, types)
+      puts "Suit: #{card.suit}, type: #{card.type}"
+      cards << card
+      i += 1
+    end
 
-while i < 2
-  card = Card.new(suits, types)
-  puts "Suit: #{card.suit}, type: #{card.type}"
-  cards << card
-  i += 1
+    i = 0
+    puts 'Flop:'
+
+    while i < 5
+      card = Card.new(suits, types)
+      puts "Suit: #{card.suit}, type: #{card.type}"
+      cards << card
+      i += 1
+    end
+
+    comb = Combination.new(cards)
+    comb.find_winner
+  end
 end
 
-i = 0
-puts 'Flop:'
-
-while i < 5
-  card = Card.new(suits, types)
-  puts "Suit: #{card.suit}, type: #{card.type}"
-  cards << card
-  i += 1
-end
-
-comb = Combination.new(cards)
-comb.find_winner
+a = Main.new
+a.run
